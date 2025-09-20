@@ -1,0 +1,512 @@
+<!Doctype>
+<html>
+
+<head>
+	<style>
+		.container {
+			width: 1700px;
+			font-size: 30px;
+		}
+
+		.textcolor {
+			color: red;
+		}
+
+		.Tank {
+			margin-top: 200px;
+			width: 50px;
+			height: 60px;
+			background: green;
+			position: absolute;
+			bottom: "20px";
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.7);
+		}
+
+		.Tank_red {
+			margin-top: 200px;
+			width: 50px;
+			height: 60px;
+			background: green;
+			position: absolute;
+			bottom: "20px";
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.7);
+		}
+
+		.Tank_blue {
+			width: 50px;
+			height: 60px;
+			background: green;
+			position: absolute;
+			top: "20px";
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.7);
+			transform: rotate(180deg);
+		}
+
+		.pos2 {
+			left: 500px;
+			top: "20px";
+		}
+
+		.pos3 {
+			left: 800px;
+			top: "20px";
+		}
+
+		.pos4 {
+			left: 1200px;
+			top: "20px";
+		}
+
+		.pos5 {
+			left: 1500px;
+			top: "20px";
+		}
+
+		.podae {
+
+			position: absolute;
+			top: 0px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 10px;
+			height: 55px;
+			background: green;
+			box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.7);
+		}
+
+		.Tank:focus-visible {
+			border: none;
+			outline: none;
+		}
+
+		.Tank_red:focus-visible {
+			border: none;
+			outline: none;
+		}
+
+		.poal {
+			position: absolute;
+			width: 10px;
+			height: 25px;
+			background: black;
+			z-index: -1;
+			transform: translate(10%, -50%);
+		}
+
+		.poal_red {
+			position: absolute;
+			width: 10px;
+			height: 25px;
+			background: black;
+			z-index: -1;
+			transform: translate(10%, -50%);
+		}
+
+		.DDugong {
+			position: absolute;
+			top: 23px;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 30px;
+			height: 30px;
+			background: green;
+			border-radius: 50%;
+			box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.7);
+		}
+
+		.red {
+			background: red;
+		}
+
+		.blue {
+			background: blue;
+		}
+
+		#score {
+			color: black;
+
+		}
+
+		.main {
+			font-size: 30px;
+		}
+
+		.flex {
+			display: flex;
+		}
+	</style>
+</head>
+
+<body id="root">
+	<div class="container textcolor">
+		<button onclick="getTime()">Start</button>
+		<button onclick="Stop()">Stop</button>
+		<button onclick="GameStart()">GameStart</button>
+		<div id="memo"></div>
+	</div>
+
+	<div class="main flex">
+		Score: Your score is &nbsp; <div id="score">0</div>
+	</div>
+
+	<button class="Tank" onKeyDown="move()">
+		<div class="podae">
+
+		</div>
+		<div class="DDugong">
+
+		</div>
+
+	</button>
+
+	<button class="Tank_red red" onKeyDown="move1()">
+		<div class="podae red">
+
+		</div>
+		<div class="DDugong red">
+
+		</div>
+
+	</button>
+
+	<button class="Tank_blue blue pos1" onKeyDown="move2()">
+		<div class="podae blue">
+
+		</div>
+		<div class="DDugong blue">
+
+		</div>
+	</button>
+
+	<button class="Tank_blue blue pos2" onKeyDown="move3()">
+		<div class="podae blue">
+
+		</div>
+		<div class="DDugong blue">
+
+		</div>
+	</button>
+
+	<button class="Tank_blue blue pos3" onKeyDown="move4()">
+		<div class="podae blue">
+
+		</div>
+		<div class="DDugong blue">
+			0
+		</div>
+	</button>
+
+	<button class="Tank_blue blue pos4" onKeyDown="move5()">
+		<div class="podae blue">
+
+		</div>
+		<div class="DDugong blue">
+
+		</div>
+	</button>
+
+	<div class="poal"></div>
+	<div class="poal_red"></div>
+	<div class="poal_blue"></div>
+	<div class="poal_blue"></div>
+	<div class="poal_blue"></div>
+	<div class="poal_blue"></div>
+</body>
+
+<script>
+
+	// let m_x = window.document.;
+	// console.log(m_x);
+	// let m_y = Mouse.x
+	let stop = false;
+	function Stop(Pavel) {
+		if (stop == true) {
+			stop = false;
+			getTime();
+		}
+		else {
+			stop = true;
+		}
+	}
+
+	function getTime() {
+		let date = new Date;
+		let month = date.getMonth();
+		let time = date.getHours();
+		let minute = date.getMinutes();
+		let second = date.getSeconds();
+		document.getElementById("memo").innerHTML = (month + 1) + " / " + time + "/" + minute + "/" + second;
+		if (stop == true) {
+		}
+		else {
+			setTimeout(getTime, 1000);
+		}
+	}
+	let tank = document.getElementsByClassName("Tank")[0];
+	let poal = document.getElementsByClassName("poal")[0];
+	tank.style.bottom = "100px";
+	tank.style.left = "100px";
+	poal.style.bottom = "100px";
+	poal.style.left = "113px";
+
+	let tank_red = document.getElementsByClassName("Tank_red")[0];
+	let poal_red = document.getElementsByClassName("poal_red")[0];
+	tank_red.style.bottom = "100px";
+	tank_red.style.left = "1000px";
+	poal_red.style.bottom = "100px";
+	poal_red.style.left = "1013px";
+
+
+	let tank_blue = document.getElementsByClassName("Tank_blue")[0];
+	let poal_blue = document.getElementsByClassName("poal_blue")[0];
+	tank_blue.style.bottom = "800px";
+	tank_blue.style.left = "1000px";
+	poal_blue.style.bottom = "1000px";
+	poal_blue.style.left = "1013px";
+
+	let tank_blue1 = document.getElementsByClassName("Tank_blue")[1];
+	let poal_blue1 = document.getElementsByClassName("poal_blue")[1];
+	tank_blue1.style.bottom = "850px";
+	tank_blue1.style.left = "500px";
+	poal_blue1.style.bottom = "1000px";
+	poal_blue1.style.left = "813px";
+
+	let tank_blue2 = document.getElementsByClassName("Tank_blue")[2];
+	let poal_blue2 = document.getElementsByClassName("poal_blue")[2];
+	tank_blue2.style.bottom = "770px";
+	tank_blue2.style.left = "1200px";
+	poal_blue2.style.bottom = "1000px";
+	poal_blue2.style.left = "1013px";
+
+	let tank_blue3 = document.getElementsByClassName("Tank_blue")[3];
+	let poal_blue3 = document.getElementsByClassName("poal_blue")[3];
+	tank_blue3.style.bottom = "873px";
+	tank_blue3.style.left = "1400px";
+	poal_blue3.style.bottom = "1000px";
+	poal_blue3.style.left = "1013px";
+
+	function move(e) {
+		if (event.key == "w") {
+
+			let y = tank.style.bottom;
+			let x = parseInt(y) + 2;
+			let xmove = x + "px";
+			tank.style.bottom = xmove;
+			poal.style.bottom = xmove;
+		}
+		if (event.key == "a") {
+
+			let y = tank.style.left;
+			let x = parseInt(y) - 20;
+			let xmove = x + "px";
+			tank.style.left = xmove;
+			poal.style.left = xmove;
+		} if (event.key == "d") {
+
+			let y = tank.style.left;
+			let x = parseInt(y) + 20;
+			let xmove = x + "px";
+			tank.style.left = xmove;
+			poal.style.left = xmove;
+		} if (event.key == "s") {
+
+			let y = tank.style.bottom;
+			let x = parseInt(y) - 20;
+			let xmove = x + "px";
+			tank.style.bottom = xmove;
+			poal.style.bottom = xmove;
+		} if (event.key == "Alt") {
+			poalmove();
+
+		} if (event.key == "r") {
+			poal.style.left = tank.style.left;
+			poal.style.bottom = tank.style.bottom;
+		}
+	}
+	function poalmove() {
+		let y = poal.style.bottom;
+		let x = parseInt(y) + 30;
+		let xmove = x + "px";
+		poal.style.bottom = xmove;
+		if (y == tank.style.bottom && poal.style.left == tank.style.left) { }
+		else { setTimeout(poalmove, 30); }
+	}
+	function move1(e) {
+		console.log(event.key);
+		if (event.key == "ArrowUp") {
+
+			let y = tank_red.style.bottom;
+			let x = parseInt(y) + 20;
+			let xmove = x + "px";
+			tank_red.style.bottom = xmove;
+			poal_red.style.bottom = xmove;
+		}
+		if (event.key == "ArrowLeft") {
+
+			let y = tank_red.style.left;
+			let x = parseInt(y) - 20;
+			let xmove = x + "px";
+			tank_red.style.left = xmove;
+			poal_red.style.left = xmove;
+		} if (event.key == "ArrowRight") {
+
+			let y = tank_red.style.left;
+			let x = parseInt(y) + 20;
+			let xmove = x + "px";
+			tank_red.style.left = xmove;
+			poal_red.style.left = xmove;
+		} if (event.key == "ArrowDown") {
+			let y = tank_red.style.bottom;
+			let x = parseInt(y) - 20;
+			let xmove = x + "px";
+			tank_red.style.bottom = xmove;
+			poal_red.style.bottom = xmove;
+		} if (event.key == "Delete") {
+			poalmove1();
+
+		} if (event.key == "Control") {
+			poal_red.style.left = tank_red.style.left;
+			poal_red.style.bottom = tank_red.style.bottom;
+		}
+	}
+	function poalmove1() {
+		let y = poal_red.style.bottom;
+		let x = parseInt(y) + 30;
+		let xmove = x + "px";
+		poal_red.style.bottom = xmove;
+		if (y == tank_red.style.bottom && poal_red.style.left == tank_red.style.left) { }
+		else { setTimeout(poalmove1, 30); }
+	}
+
+	function GameStart() {
+		move2();
+		move3();
+		move4();
+		move5();
+
+	}
+
+	function move2() {
+		let y = tank_blue.style.bottom;
+		let x = parseInt(y) - 5;
+		let xmove = x + "px";
+		tank_blue.style.bottom = xmove;
+		poal_blue.style.bottom = xmove;
+		setTimeout(move2, 80);
+	}
+	function move3() {
+		let y = tank_blue1.style.bottom;
+		let x = parseInt(y) - 5;
+		let xmove = x + "px";
+		tank_blue1.style.bottom = xmove;
+		poal_blue1.style.bottom = xmove;
+		setTimeout(move3, 160);
+	}
+	function move4() {
+		let y = tank_blue2.style.bottom;
+		let x = parseInt(y) - 5;
+		let xmove = x + "px";
+		tank_blue2.style.bottom = xmove;
+		poal_blue2.style.bottom = xmove;
+		setTimeout(move4, 210);
+	}
+	function move5() {
+		let y = tank_blue3.style.bottom;
+		let x = parseInt(y) - 5;
+		let xmove = x + "px";
+		tank_blue3.style.bottom = xmove;
+		poal_blue3.style.bottom = xmove;
+		setTimeout(move5, 100);
+	}
+
+	var score = 0;
+	function destroy() {
+		let p_x = parseInt(poal_red.style.left);
+		let p_y = parseInt(poal_red.style.bottom);
+		let e_x = parseInt(tank_blue.style.left);
+		let e_y = parseInt(tank_blue.style.bottom);
+		let p_x1 = parseInt(poal.style.left);
+		let p_y1 = parseInt(poal.style.bottom);
+
+		let e_x1 = parseInt(tank_blue1.style.left);
+		let e_y1 = parseInt(tank_blue1.style.bottom);
+		let e_x2 = parseInt(tank_blue2.style.left);
+		let e_y2 = parseInt(tank_blue2.style.bottom);
+		let e_x3 = parseInt(tank_blue3.style.left);
+		let e_y3 = parseInt(tank_blue3.style.bottom);
+
+		if ((p_x - e_x) > -30 && (p_x - e_x) < 30 && (p_y - e_y) > -30 && (p_y - e_y) < 30 ) {
+			tank_blue.style.background = "black";
+			poal_red.style.left = tank_red.style.left;
+			poal_red.style.bottom = tank_red.style.bottom;
+			tank_blue.innerHTML = "destory";
+			tank_blue.style.display = "none";
+			score = 20;if(score == 80 ) alert("All diet");
+			document.getElementById("score").innerHTML = score;
+		}
+
+		if ((p_x - e_x1) > -30 && (p_x - e_x1) < 30 && (p_y - e_y1) > -30 && (p_y - e_y1) < 30 ) {
+			tank_blue1.style.background = "black";
+			poal_red.style.left = tank_red.style.left;
+			poal_red.style.bottom = tank_red.style.bottom;
+			tank_blue1.innerHTML = "destory";
+			tank_blue1.style.display = "none";
+			score += 20;if(score == 80 ) alert("All diet");
+			document.getElementById("score").innerHTML = score;
+		} else {
+
+		}
+
+		if ((p_x - e_x2) > -30 && (p_x - e_x2) < 30 && (p_y - e_y2) > -30 && (p_y - e_y2) < 30 ) {
+			tank_blue2.style.background = "black";
+			poal_red.style.left = tank_red.style.left;
+			poal_red.style.bottom = tank_red.style.bottom;
+			tank_blue2.innerHTML = "destory";
+			tank_blue2.style.display = "none";
+			score += 20;if(score == 80 ) alert("All diet");
+			document.getElementById("score").innerHTML = score;
+		}
+
+		if ((p_x - e_x3) > -30 && (p_x - e_x3) < 30 && (p_y - e_y3) > -30 && (p_y - e_y3) < 30 ) {
+			tank_blue3.style.background = "black";
+			poal_red.style.left = tank_red.style.left;
+			poal_red.style.bottom = tank_red.style.bottom;
+			tank_blue3.innerHTML = "destory";
+			tank_blue3.style.display = "none";
+			score += 20;if(score == 80 ) alert("All diet");
+			document.getElementById("score").innerHTML = score;
+		}
+
+		if ((p_x1 - e_x) > -30 && (p_x1 - e_x) < 30 && (p_y1 - e_y) > -30 && (p_y1 - e_y) < 30) {
+			tank_blue.style.background = "black";
+			poal.style.left = tank_red.style.left;
+			poal.style.bottom = tank_red.style.bottom;
+			tank_blue.innerHTML = "destory";
+			tank_blue.style.display = "none";
+			score += 20;
+			if(score == 80 ) alert("All diet");
+			document.getElementById("score").innerHTML = score;
+		}
+		setTimeout(destroy, 10);
+	}
+	destroy();
+
+	function ready() {
+		let t = tank_blue.style.bottom;
+		console.log(t);
+		let t1 = tank_blue1.style.bottom;
+		let t2 = tank_blue2.style.bottom;
+		let t3 = tank_blue3.style.bottom;
+		if (t < 0 && t1 < 0 && t2 < 0 && t3 < 0) {
+			console.log(t1);
+		}
+		setTimeout(ready, 10);
+	}
+</script>
+</html>
